@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Table1</title>
+    <style>
+        body {
+            text-align: center;
+            margin: 0;
+            padding: 0;
+            background-color: #171717;
+            color: white;
+        }
+
+        table {
+            font-size: 16px;
+            margin: auto;
+        }
+
+        #table,
+        th,
+        td,
+        tr {
+            text-align: center;
+            padding: 5px;
+
+        }
+
+        #table1,
+        tr,
+        td,
+        tr {
+            text-align: left;
+        }
+
+        button {
+            font-size: 16px;
+            padding: 3px;
+            margin: 5px;
+            border-style: none;
+            border-radius: 5px;
+        }
+
+        footer {
+            position: fixed;
+            left: 0;
+            bottom: 0;
+            width: 100%;
+        }
+    </style>
+</head>
+
+<body>
+    <button onclick="goBack()">Go Back</button>
+    <table class="table" id="table" style="display:none;">
+        <thead>
+            <tr id="headertable">
+                <th scope="col">S. No.</th>
+                <th scope="col">Time</th>
+                <th scope="col">Actions</th>
+            </tr>
+        </thead>
+        <tbody id="tablebody">
+            <tr>
+                <th scope="row">1</th>
+                <td>time</td>
+                <td><button class="delete">-</button></td>
+            </tr>
+        </tbody>
+    </table>
+    <table id="table1">
+        <tr>
+            <td>Number of Solves:</td>
+            <td id="row0"></td>
+        </tr>
+        <tr>
+            <td>Overall Mean:</td>
+            <td id="row1"></td>
+        </tr>
+        <tr>
+            <td>Best Time:</td>
+            <td id="row2"></td>
+        </tr>
+        <tr>
+            <td>Worst Time:</td>
+            <td id="row3"></td>
+        </tr>
+        <tr>
+            <td>Current Avg. of 5:</td>
+            <td id="row4"></td>
+        </tr>
+        <tr>
+            <td>Current Avg. of 12:</td>
+            <td id="row5"></td>
+        </tr>
+        <tr>
+            <td>Current Avg. of 25:</td>
+            <td id="row6"></td>
+        </tr>
+        <tr>
+            <td>Current Avg. of 50:</td>
+            <td id="row7"></td>
+        </tr>
+        <tr>
+            <td>Current Avg. of 100:</td>
+            <td id="row8"></td>
+        </tr>
+        <tr>
+            <td>Current Avg. of 200:</td>
+            <td id="row9"></td>
+        </tr>
+        <tr>
+            <td>Current Avg. of 500:</td>
+            <td id="row10"></td>
+        </tr>
+        <footer>
+            <div>Ⓒ 2020 Developed by Shreya Patel</div>
+        </footer>
+
+    </table>
+    <script>
+        function getandupdate() {
+            console.log(last);
+            tit = document.getElementById('min').innerHTML + " : " + document.getElementById('sec').innerHTML + " . " + document.getElementById('milisec').innerHTML + last;
+
+            if (localStorage.getItem('itemsJson') == null) {
+                itemJsonArray = [];
+                itemJsonArray.push(tit);
+                localStorage.setItem('itemsJson', JSON.stringify(itemJsonArray));
+            }
+            else {
+                itemJsonArrayStr = localStorage.getItem('itemsJson');
+                itemJsonArray = JSON.parse(itemJsonArrayStr);
+                itemJsonArray.push(tit);
+                localStorage.setItem('itemsJson', JSON.stringify(itemJsonArray));
+            }
+            update();
+        }
+        function update() {
+            if (localStorage.getItem('itemsJson') == null) {
+                itemJsonArray = [];
+                localStorage.setItem('itemsJson', JSON.stringify(itemJsonArray));
+            }
+            else {
+                itemJsonArrayStr = localStorage.getItem('itemsJson');
+                itemJsonArray = JSON.parse(itemJsonArrayStr);
+            }
+            //populate table
+            tablebody = document.getElementById("tablebody");
+            let str = " ";
+            itemJsonArray.forEach((element, index) => {
+                var timee = "";
+                for (var i = 0; i < 12; i++) {
+                    timee += element[i];
+                }
+                str = `
+                    <tr>
+                        <th scope="row">${index + 1}</th>
+                        <td>${timee}</td>
+                        <td><button class="delete" onclick="deleted(${index})"><i class="fa fa-trash"></i></button>  
+                        <button class="info" onclick="scr(${index})">i</button></td>
+                    </tr>` + str;
+            });
+            tablebody.innerHTML = str;
+
+
+            //finding avg avg of all the times
+            var table = document.getElementById("table"), totalMilliseconds = 0, tms = 0,
+                rowCount = table.rows.length - 1;// minus the header
+            document.getElementById("row0").innerHTML = rowCount;
+            for (var i = 1; i < table.rows.length; i++) {
+                parts = [];
+                parts.push(table.rows[i].cells[1].innerHTML[0] + table.rows[i].cells[1].innerHTML[1]);
+                parts.push(table.rows[i].cells[1].innerHTML[5] + table.rows[i].cells[1].innerHTML[6]);
+                parts.push(table.rows[i].cells[1].innerHTML[10] + table.rows[i].cells[1].innerHTML[11]);
+                // console.log(parts)
+                // parts=table.rows[i].cells[1].innerHTML.split(':');
+                let minutes = parseInt(parts[0], 10) * 60000;
+                let seconds = parseInt(parts[1], 10) * 1000;
+                let miliseconds = parseInt(parts[2], 10);
+                totalMilliseconds += (minutes + seconds + miliseconds);
+            }
+            var avgmin = 0, avgsec = 0, avgmilisec = 0;
+            avgtotalMilliseconds = Math.round(totalMilliseconds / rowCount);
+            avgmin = Math.floor((avgtotalMilliseconds / 60000) << 0);
+            avgmin = avgmin > 9 ? "" + avgmin : "0" + avgmin;
+            avgsec = Math.floor(((avgtotalMilliseconds - (avgmin * 60000)) / 1000) << 0);
+            avgsec = avgsec > 9 ? "" + avgsec : "0" + avgsec;
+            avgmilisec = (avgtotalMilliseconds - (avgmin * 60000) - (avgsec * 1000)) << 0;
+            avgmilisec = avgmilisec > 9 ? "" + avgmilisec : "0" + avgmilisec;
+            if (avgmilisec >= 100) {
+                avgmilisec = Math.round(avgmilisec / 10);
+            }
+            document.getElementById("row1").innerHTML = avgmin + " : " + avgsec + " . " + avgmilisec;
+            // avg last best 5
+            var arr1 = [5, 12, 25, 50, 100, 200, 500];
+            for (var j = 0; j < 7; j++) {
+                if (rowCount >= arr1[j]) {
+                    var arr = [];
+                    for (var i = 1; i <= arr1[j]; i++) {
+                        parts = [];
+                        parts.push(table.rows[i].cells[1].innerHTML[0] + table.rows[i].cells[1].innerHTML[1]);
+                        parts.push(table.rows[i].cells[1].innerHTML[5] + table.rows[i].cells[1].innerHTML[6]);
+                        parts.push(table.rows[i].cells[1].innerHTML[10] + table.rows[i].cells[1].innerHTML[11]);
+                        // parts=table.rows[i].cells[1].innerHTML.split(':');
+                        let minutes = parseInt(parts[0], 10) * 60000;
+                        let seconds = parseInt(parts[1], 10) * 1000;
+                        let miliseconds = parseInt(parts[2], 10);
+                        arr.push(minutes + seconds + miliseconds);
+                        // console.log(miliseconds);
+                    }
+                    arr.sort(function (a, b) { return a > b });
+                    // console.log(arr);
+                    tms = 0;
+                    for (var i = 1; i < arr1[j] - 1; i++) {
+                        tms += arr[i];
+                    }
+                    var avgmin1 = 0, avgsec1 = 0, avgmilisec1 = 0;
+                    atms = Math.round(tms / (arr1[j] - 2.0));
+                    avgmin1 = Math.floor((atms / 60000) << 0);
+                    avgmin1 = avgmin1 > 9 ? "" + avgmin1 : "0" + avgmin1;
+                    avgsec1 = Math.floor(((atms - (avgmin1 * 60000)) / 1000) << 0);
+                    avgsec1 = avgsec1 > 9 ? "" + avgsec1 : "0" + avgsec1;
+                    avgmilisec1 = (atms - (avgmin1 * 60000) - (avgsec1 * 1000)) << 0;
+                    avgmilisec1 = avgmilisec1 > 9 ? "" + avgmilisec1 : "0" + avgmilisec1;
+                    if (avgmilisec1 >= 100) {
+                        avgmilisec1 = Math.round(avgmilisec1 / 10);
+                    }
+                    document.getElementById("row" + (j + 4)).innerHTML = avgmin1 + " : " + avgsec1 + " . " + avgmilisec1;
+                }
+                else {
+                    document.getElementById("row" + (j + 4)).innerHTML = " - ";
+                }
+            }
+
+
+            //min max
+            var arr = new Array(table.rows.length - 1);
+            for (var i = 1; i < table.rows.length; i++) {
+                parts = [];
+                parts.push(table.rows[i].cells[1].innerHTML[0] + table.rows[i].cells[1].innerHTML[1]);
+                parts.push(table.rows[i].cells[1].innerHTML[5] + table.rows[i].cells[1].innerHTML[6]);
+                parts.push(table.rows[i].cells[1].innerHTML[10] + table.rows[i].cells[1].innerHTML[11]);
+                // parts=table.rows[i].cells[1].innerHTML.split(':');
+                let minutes = parseInt(parts[0], 10) * 60000;
+                let seconds = parseInt(parts[1], 10) * 1000;
+                let miliseconds = parseInt(parts[2], 10);
+                arr[i - 1] = minutes + seconds + miliseconds;
+            }
+
+            arr.sort(function (a, b) { return a - b });
+
+            avgmin2 = Math.floor((arr[0] / 60000) << 0);
+            avgmin2 = avgmin2 > 9 ? "" + avgmin2 : "0" + avgmin2;
+            avgsec2 = Math.floor(((arr[0] - (avgmin2 * 60000)) / 1000) << 0);
+            avgsec2 = avgsec2 > 9 ? "" + avgsec2 : "0" + avgsec2;
+            avgmilisec2 = (arr[0] - (avgmin2 * 60000) - (avgsec2 * 1000)) << 0;
+            avgmilisec2 = avgmilisec2 > 9 ? "" + avgmilisec2 : "0" + avgmilisec2;
+            document.getElementById("row2").innerHTML = avgmin2 + " : " + avgsec2 + " . " + avgmilisec2;
+
+
+            avgmin3 = Math.floor((arr[table.rows.length - 2] / 60000) << 0);
+            avgmin3 = avgmin3 > 9 ? "" + avgmin3 : "0" + avgmin3;
+            avgsec3 = Math.floor(((arr[table.rows.length - 2] - (avgmin3 * 60000)) / 1000) << 0);
+            avgsec3 = avgsec3 > 9 ? "" + avgsec3 : "0" + avgsec3;
+            avgmilisec3 = (arr[table.rows.length - 2] - (avgmin3 * 60000) - (avgsec3 * 1000)) << 0;
+            avgmilisec3 = avgmilisec3 > 9 ? "" + avgmilisec3 : "0" + avgmilisec3;
+            document.getElementById("row3").innerHTML = avgmin3 + " : " + avgsec3 + " . " + avgmilisec3;
+        }
+        function scr(index) {
+            var pr = "";
+            for (var i = 12; i < itemJsonArray[index].length; i++) {
+                pr += itemJsonArray[index][i];
+            }
+            alert("Scramble: " + pr);
+        }
+
+        update();
+        function deleted(itemIndex) {
+            itemJsonArrayStr = localStorage.getItem('itemsJson');
+            itemJsonArray = JSON.parse(itemJsonArrayStr);
+            //delete itemindex element from the array
+            itemJsonArray.splice(itemIndex, 1);
+            localStorage.setItem('itemsJson', JSON.stringify(itemJsonArray));
+            update();
+        }
+        function goBack() {
+            location.replace("tae.html");
+        }
+
+    </script>
+
+</body>
+
+</html>

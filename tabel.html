@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <title>Table</title>
+    <style>
+        body {
+            text-align: center;
+            margin: 0;
+            padding: 0;
+            background-color: #171717;
+            color: white;
+        }
+
+        .info {
+
+            border-radius: 100%;
+            width: 20px;
+            height: 20px;
+            margin:0 auto;
+            font-size: 14px;
+            border-style: none;
+        }
+
+        .delete {
+            width: 20px;
+            height: 20px;
+            font-size: 14px;
+            border-radius: 100%;
+            border-style: none;
+        }
+
+        table {
+            font-size: 16px;
+            margin: auto;
+        }
+
+        #headertable {
+            top: -5px;
+            position: sticky;
+            background-color: #171717;
+        }
+
+        #table,
+        th,
+        td,
+        tr {
+            text-align: center;
+            padding: 5px;
+            
+        }
+
+
+
+
+        button {
+            font-size: 16px;
+            padding: 3px;
+            margin: 5px;
+            border-style: none;
+            border-radius: 5px;
+            position:sticky;
+        }
+
+        #tablecontainer {
+            display: grid;
+            height: 100vh;
+            grid-template-columns: 1fr;
+            grid-template-rows: 30px 3.5fr 0.15fr;
+            grid-template-areas:
+                " header "
+                " main "
+                " footer ";
+
+        }
+
+        header {
+            grid-area: header;
+            top:0;
+            width: 100%;
+            position: fixed;
+          
+
+        }
+
+        main {
+            grid-area: main;
+            
+            overflow-y:scroll;
+            margin:1px;
+        }
+
+        footer {
+            grid-area:footer;
+            position: fixed;
+            left: 0;
+            bottom: 0;
+            width: 100%;
+          
+        }
+        #headertable{
+            top:-5px;
+            position:sticky;
+           
+        }
+        #copyright{
+            margin-bottom:5px;
+        }
+
+    </style>
+</head>
+
+<body>
+    <div id="tablecontainer">
+        <header>
+            <button onclick="goBack()">Go Back</button>
+            <button id="clear" class="clear" onclick="clearstorage()" >Clear Table</button>
+        </header>
+        <main>
+            <table class="table" id="table">
+                <thead>
+                    <tr id="headertable">
+                        <th scope="col">S. No.</th>
+                        <th scope="col">Time</th>
+                        <th scope="col">Actions</th>
+                    </tr>
+                </thead>
+                <tbody id="tablebody">
+                    <tr>
+                        <th scope="row">1</th>
+                        <td>time</td>
+                        <td><button class="delete">-</button></td>
+                    </tr>
+                </tbody>
+            </table>
+        </main>
+        <footer>
+            <div id="copyright">Ⓒ 2020 Developed by Shreya Patel</div>
+        </footer>
+    </div>
+    <script>
+        function getandupdate() {
+            console.log(last);
+            tit = document.getElementById('min').innerHTML + " : " + document.getElementById('sec').innerHTML + " . " + document.getElementById('milisec').innerHTML + last;
+
+            if (localStorage.getItem('itemsJson') == null) {
+                itemJsonArray = [];
+                itemJsonArray.push(tit);
+                localStorage.setItem('itemsJson', JSON.stringify(itemJsonArray));
+            }
+            else {
+                itemJsonArrayStr = localStorage.getItem('itemsJson');
+                itemJsonArray = JSON.parse(itemJsonArrayStr);
+                itemJsonArray.push(tit);
+                localStorage.setItem('itemsJson', JSON.stringify(itemJsonArray));
+            }
+            update();
+        }
+
+        function update() {
+            if (localStorage.getItem('itemsJson') == null) {
+                itemJsonArray = [];
+                localStorage.setItem('itemsJson', JSON.stringify(itemJsonArray));
+            }
+            else {
+                itemJsonArrayStr = localStorage.getItem('itemsJson');
+                itemJsonArray = JSON.parse(itemJsonArrayStr);
+            }
+            //populate table
+            tablebody = document.getElementById("tablebody");
+            let str = " ";
+            itemJsonArray.forEach((element, index) => {
+                var timee = "";
+                for (var i = 0; i < 12; i++) {
+                    timee += element[i];
+                }
+                str = `
+                    <tr>
+                        <th scope="row">${index + 1}</th>
+                        <td>${timee}</td>
+                        <td><button class="delete" onclick="deleted(${index})"><i class="fa fa-trash"></i></button>  
+                        <button class="info" onclick="scr(${index})">i</button></td>
+                    </tr>` + str;
+            });
+            tablebody.innerHTML = str;
+        }
+        update();
+        function deleted(itemIndex) {
+            itemJsonArrayStr = localStorage.getItem('itemsJson');
+            itemJsonArray = JSON.parse(itemJsonArrayStr);
+            //delete itemindex element from the array
+            itemJsonArray.splice(itemIndex, 1);
+            localStorage.setItem('itemsJson', JSON.stringify(itemJsonArray));
+            update();
+        }
+        function scr(index) {
+            var pr = "";
+            for (var i = 12; i < itemJsonArray[index].length; i++) {
+                pr += itemJsonArray[index][i];
+            }
+            alert("Scramble: " + pr);
+        }
+        function goBack() {
+            location.replace("tae.html");
+        }
+        function clearstorage() {
+            if (confirm("Do you want to clear the whole list?")) {
+                localStorage.clear();
+                document.getElementById("row1").innerHTML = "00 : 00 . 00";
+                document.getElementById("row2").innerHTML = "00 : 00 . 00";
+                document.getElementById("row3").innerHTML = "00 : 00 . 00";
+                document.getElementById("row4").innerHTML = "-";
+                document.getElementById("row5").innerHTML = "-";
+                document.getElementById("row6").innerHTML = "-";
+                document.getElementById("row7").innerHTML = "-";
+                document.getElementById("row8").innerHTML = "-";
+                document.getElementById("row9").innerHTML = "-";
+                document.getElementById("row10").innerHTML = "-";
+                reloadP();
+                update();
+            }
+        }
+    </script>
+
+</body>
+
+</html>
