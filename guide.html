@@ -1,0 +1,355 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+
+<head>
+  <meta charset="utf-8">
+  <title>LEARN</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <style>
+    #container {
+      display: grid;
+      height: 100vh;
+      grid-template-columns: 0.25fr 1fr;
+      grid-template-rows: 50px 1fr ;
+      grid-template-areas:
+       "nav nav"
+       "step info";
+    }
+   
+    
+    button{
+      background-color:black;
+      color: white;
+      border-style: none;
+      padding:4.5vh;
+      border-top-right-radius: 25px;
+      border-bottom-right-radius: 25px;
+      font-size: 1rem;
+      margin:5px 10px 5px 0px;
+    }
+    button:hover{
+      background-color:black;
+      color: white;
+      border-style: none;
+      padding:4.5vh 7vh 4.5vh 4.5vh;
+      border-top-right-radius: 25px;
+      border-bottom-right-radius: 25px;
+      font-size: 1rem;
+    
+    }
+    #step{
+      grid-area: step;
+      height:100vh;
+    }
+
+    #info{
+      grid-area: info;
+    }
+
+    nav{
+      grid-area: nav;
+      
+    }
+     
+
+    .overlay{
+      font-size: 20px;
+      text-align: justify;
+    }
+
+    #a1{
+      padding-left: 44%;
+      padding-top:  2%;
+    }
+
+    #a2{
+      text-overflow: clip;
+      padding-top: 10px;
+      text-align: center;
+    }
+    #a3{
+      padding-top: 50px;
+    }
+    nav {
+            width: 100%;
+            padding: 10px 0px;
+            height: 25px;
+            background-color: transparent;
+        }
+
+        #progamma {
+            float: left;
+            border-style: none;
+            font-size: 20px;
+            background-color: transparent;
+            color: white;
+            padding: 0px 0px 0px 10px;
+        }
+
+        #progamma:hover {
+            color: grey;
+
+        }
+
+
+        #social {
+            background-color: transparent;
+            display: flex;
+            flex-direction: row;
+            justify-content: center;
+            align-items: center;
+            float: right;
+        }
+
+        #social div {
+            padding: 0px 10px;
+            font-size: 25px;
+            transition: .3s linear;
+        }
+        .settings a {
+            color: white;
+        }
+
+        .settings:hover a {
+            color: grey;
+        }
+
+  </style>
+</head>
+
+
+<body>
+
+  <div id="container">
+    <nav>
+      <a id="progamma" onclick="reloadP()">PRO-GAMMA</a>
+      <section id="social">
+          <div class="settings"><a href="main.html"><i class="fa fa-angle-double-left"></i></a></div>
+      </section>
+  </nav>
+        <div id="info">
+          <div id="a1">
+            <img src="images/cube.svg" alt="image of cube">
+          </div>
+          <div id="a2">
+
+          <h1><u>How to solve the Rubik's Cube? </u></h1>
+
+          <h3>There are many approaches on how to solve the Rubik's Cube. All these methods have different levels of
+            difficulties,
+            for speedcubers or beginners, even for solving the cube blindfolded. People usually get stuck solving the cube
+            after
+            completing the first face, after that they need some help. In the following article I'm going to show you the
+            easiest
+            way to solve the cube using the beginner's method.
+          </h3>
+          <p>The method presented here divides the cube into layers and you can solve each layer applying a given algorithm
+            not
+            messing up the pieces already in place. You can find a separate page for each one of the seven stages if the
+            description on this page needs further explanation and examples.
+          </p>
+          <div id="a3">
+          <p><img src="images/solve.png" alt="how to solve image"></p>
+        </div>
+        </div>
+        </div>
+        <div id="steps">
+            <div id="b1">
+              <button type="button" onclick="openNav1()">STEP 1</button>
+            </div>
+            <div id="b2">
+            <button type="button" onclick="openNav2()">STEP 2</button>
+            </div>
+            <div id="b3">
+              <button type="button" onclick="openNav3()">STEP 3</button>
+            </div>
+            <div id="b4">
+              <button type="button" onclick="openNav4()">STEP 4</button>
+            </div>
+            <div id="b5">
+              <button type="button" onclick="openNav5()">STEP 5</button>
+            </div>
+            <div id="b6">
+              <button type="button" onclick="openNav6()">STEP 6</button>
+            </div>
+            <div id="b7">
+            <button type="button" onclick="openNav7()">STEP 7</button>
+            </div>
+        </div>
+
+        <div id="step-1-div" class="overlay">
+          <div id="s1" class="overlay-content">
+            <h3><u>1. White Cross</u></h3>
+            <p>
+              Let's begin with the white face. First we have to make a white cross paying attention to the color of the
+              side center pieces. You can try to do this without reading the instructions.
+            </p>
+            <p>
+              <b>Use this stage to familiarize yourself with the puzzle and see how far you can get without help.</b>
+            <p>
+              This step is relatively intuitive because there are no solved pieces to watch out for. Just practice and
+              don't give up easily. Try move the white edges to their places not messing up the ones already fixed.
+            </p>
+            </p>
+            <div><img src="images/wc1.svg" alt="Good White Cross">
+              <p>Good White Cross</p>
+            </div>
+            <div><img src="images/wc2.svg" alt="Sides not matching">
+              <p>Sides not matching</p>
+            </div>
+          </div>
+
+          <a href="javascript:void(0)" class="closebtn" onclick="closeNav1()">&times;</a>
+        </div>
+
+        <div id="step-2-div" class="overlay">
+          <div id="s2" class="overlay-content">
+            <h3><u>2. White Corners</u></h3>
+            <p>
+              In this step we have to arrange the white corner pieces to finish the first face. If you are very persistent
+              and
+              you
+              managed to do the white cross without help then you can try to do this one as well. If you don't have patience
+              I'll
+              give you some clue.
+            </p>
+            <p>
+              Twist the bottom layer so that one of the white corners is directly under the spot where it's supposed to go
+              on
+              the top layer.
+              Now, do one of the three algorithms according to the orientation of the piece, aka. in which direction the
+              white
+              sticker is facing.
+              If the white corner piece is where it belongs but turned wrong then first you have to pop it out.
+            </p>
+
+            <div><img src="images/wco3.png" alt="Unsolved Corner">
+              <p>One Unsolved White Corner</p>
+            </div>
+            <div><img src="images/wco2.svg" alt="solved Corner">
+              <p>solved White Corner</p>
+            </div>
+          </div>
+          <a href="javascript:void(0)" class="closebtn" onclick="closeNav2()">&times;</a>
+        </div>
+
+        <div id="step-3-div" class="overlay">
+          <div id="s3" class="overlay-content">
+            <h3><u>3. Second layer</u></h3>
+            <p>
+              Until this point the procedure was pretty straight forward but from now on we have to use algorithms. We can
+              forget the completed
+              white face so let's turn the cube upside down to focus on the unsolved side.
+            </p>
+            <p>
+              In this step we are completing the first two layers (F2L). There are two symmetric algorithms we have to use
+              in
+              this step.
+              They're called the Right and Left algorithms. These algorithms insert the Up-Front edge piece from the top
+              layer
+              to the middle
+              layer while not messing up the solved white face.If none of the pieces in the top layer are already lined up
+              like
+              in the images
+              below, then turn the top layer until one of the edge pieces in the top layer matches one of the images below.
+              Then
+              follow the
+              matching algorithm for that orientation.
+            </p>
+            <p><img src="images/2ndlayer.png" alt="unsolved 2nd layer"></p>
+            <p>by the following algorithm, you can solve the 2nd Layer:</p>
+            <p><img src="images/left2ndl.png" alt="algorithm">
+              &nbsp;&nbsp;&nbsp;
+              <img src="images/right2ndl.png" alt="algorithm">
+            </p>
+            <p>Solved below:</p>
+            <p><img src="images/f2lsolved.svg" alt="solved f2l"></p>
+          </div>
+          <a href="javascript:void(0)" class="closebtn" onclick="closeNav3()">&times;</a>
+        </div>
+
+        <div id="step-4-div" class="overlay">
+          <div id="s4" class="overlay-content">
+            <h3><u>4. Yellow Cross</u></h3>
+            <p>
+              Sart solving the last layer making a yellow cross on the top of the cube.
+              It doesn't matter if the pieces are not on their final places so we don't
+              have to pay attention to the colors of the sides.
+            </p>
+            <p>We can get three possible patterns on the top. Use this algorithm to go from one state to the other:</p>
+            <img src="images/yellow_cross.png" alt="algo of yellow_cross">
+
+            <p>
+              <li>
+                1.When you see a dot you have to apply the algorithm three times. If you have a yellow "L" shape then onlye
+                twice,
+                holding the cube in your hands as seen on the image below.
+              </li>
+              <li>2. In case of a horizontal line you just have to execute the permutation once.</li>
+              <div> <img src="images/yellow_cross2.png" alt="yellow_cross2"> </div>
+            </p>
+            <p> <img src="images/yellow_cross3.svg" alt="final look"> </p>
+          </div>
+          <a href="javascript:void(0)" class="closebtn" onclick="closeNav4()">&times;</a>
+        </div>
+
+        <div id="step-5-div" class="overlay">
+          <div id="s5" class="overlay-content">
+            <h3> <u>5. yellow Edges</u> </h3>
+            <p>After making the yellow cross on the top of the cube you have to put the yellow edge pieces on their final
+              places
+              to match the colors of the side center pieces. Switch the front and left yellow edges with the following
+              algorithm:</p>
+            <p> <img src="images/yellow_edges1.png" alt="algo of yellow_edges1"></p>
+            <p> <img src="images/yellow_edge2.svg" alt="how it looks"> &nbsp; <img src="images/yellow_edge3.svg"
+                alt="solved yellow_edges"> </p>
+          </div>
+          <a href="javascript:void(0)" class="closebtn" onclick="closeNav5()">&times;</a>
+        </div>
+
+        <div id="step-6-div" class="overlay">
+          <div id="s6" class="overlay-content">
+            <h3> <u>6. Yellow corners on their places </u> </h3>
+            <p>Only the last layer corners are left unsolved. First we have to get them to the right spot, so don't worry
+              about
+              the orientation in this step.</p>
+            <img src="images/yellow_edges_solved.svg" alt="solved yellow edges">
+            <p>Find a piece which is already on the right place, move it to the right-front-top corner then apply the
+              following
+              algorithm to switch (cycle) the three wrong pieces marked on the image.</p>
+            <img src="images/algo_of_yellow_corner.png" alt="algo_of_yellow_corner">
+            <p>Do this twice to do an inverse rotation of the pieces. If none of the yellow corners is on the right place
+              then
+              execute the algorithm once to get a good piece.</p>
+          </div>
+          <a href="javascript:void(0)" class="closebtn" onclick="closeNav6()">&times;</a>
+        </div>
+
+        <div id="step-7-div" class="overlay">
+          <div id="s7" class="overlay-content">
+            <h3> <u>7. Orient Yellow Corners</u> </h3>
+            <p>All pieces are on their right places you just have to orient the yellow corners to finish the puzzle. This
+              proved
+              to be the most confusing step so read the instructions and follow the steps carefully.</p>
+            <img src="images/solvedcube1.png" alt="unsolved Corners">
+            <p>Hold the cube in your hand with an unsolved corner on the front-right-top corner, then do the algorithm below
+              twice or four times until that specific piece is oriented well: </p>
+            <img src="images/algo_of_unsolved_corners.png" alt="algo of unsolved Corners">
+            <p>It will look like you've messed up the whole cube but don't worry, it will be all right when all the corner
+              pieces are oriented.Turn the top layer only to move another unsolved
+              yellow piece to the front-right-top corner of the cube and do the same R' D' R D again until this specific
+              piece
+              is ok. Be careful not to move the two bottom
+              layers between the algorithms and never rotate the whole cube!
+            </p>
+            <img src="images/solvedcube2.svg" alt="solved Cube">
+          </div>
+          <a href="javascript:void(0)" class="closebtn" onclick="closeNav7()">&times;</a>
+        </div>
+
+  </div>
+</body>
+<script src="script.js"></script>
+
+</html>

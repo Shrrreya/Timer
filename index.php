@@ -136,7 +136,7 @@ form{
 </head>
 <body>
 <?php
-$con =mysqli_connect('localhost','root','','vvi');
+$con =mysqli_connect('localhost','root','','vd');
 
 if (!$con) {
     die("Connection failed: " . mysqli_connect_error());
