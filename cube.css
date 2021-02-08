@@ -1,0 +1,94 @@
+* {
+    margin: 0;
+    padding: 0;
+    color: white;
+    font-family: 'Times New Roman', Times, serif;
+    text-align: center;
+}
+
+body {
+    background-color: #171717;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-attachment: fixed;
+    background-position: center;
+    height: 90%;
+}
+
+#sequence {
+    font-size: larger;
+    position: relative;
+    top: 80px;
+}
+
+
+table,
+th,
+td {
+    border: 1px solid white;
+    border-collapse: collapse;
+    line-height: 1.4rem;
+    border-spacing: 5px;
+    text-align: center;
+}
+
+th,
+td {
+    padding: 4px;
+}
+
+.instructions {
+    position: absolute;
+    right: 10px;
+    top: 100px;
+}
+
+.face-moves {
+    position: absolute;
+    left: 10px;
+    top: 100px;
+}
+
+button {
+    color: white;
+    width: 90px;
+    height: 25px;
+    background-color: transparent;
+    margin: 2px 0;
+    border-radius: 10px;
+}
+
+.buttons {
+    visibility: hidden;
+    display: grid;
+    grid-template-columns: repeat(3, minmax(100px, 1fr));
+    justify-items: center;
+    margin: 90px auto 0;
+}
+
+.sub-buttons {
+    display: grid;
+    grid-template-columns: 1fr;
+}
+
+.hide {
+    display: none;
+}
+
+.copyright {
+    font-size: 12px;
+}
+
+@media screen and (max-width:1000px) {
+    table {
+        visibility: hidden;
+    }
+
+    .buttons {
+        visibility: visible;
+    }
+
+    .buttons {
+        margin: 25vh auto 0;
+    }
+}

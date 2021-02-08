@@ -11,13 +11,16 @@
             text-align: center;
             margin: 0;
             padding: 0;
-            background-image: radial-gradient(rgb(80, 80, 80), black);
+            /*background-image: radial-gradient(rgb(80, 80, 80), black);*/
+            background-color: #171717;
             color: white;
+            font-family: 'Times New Roman', Times, serif;
         }
 
         .hide {
             display: none;
         }
+
         /*cube structure*/
         .plane-cube {
             transform: scale3d(0.9, 0.9, 0.9);
@@ -25,7 +28,7 @@
             transform-origin: center;
             width: 80px;
             height: 90px;
-            margin: 90px auto 60px;
+            margin: 110px auto 60px;
         }
 
         .part {
@@ -306,11 +309,12 @@
         #countdown {
             text-align: center;
             margin: 10px;
-            font-size: 40px;
+            font-size: 100px;
             color: white;
             height: 100%;
 
         }
+
         /*navigation bar*/
         nav {
             width: 100%;
@@ -332,7 +336,7 @@
             color: grey;
 
         }
-    
+
 
         #social {
             background-color: transparent;
@@ -373,6 +377,15 @@
             color: grey;
         }
 
+        #ins_div {
+            font-size: 16px;
+            padding: 3px;
+            margin: 5px;
+            border-style: none;
+            border-radius: 5px;
+            background-color: #ddd;
+            color: black;
+        }
 
         /*buttons*/
         button {
@@ -381,6 +394,7 @@
             margin: 5px;
             border-style: none;
             border-radius: 5px;
+            background-color: #ddd;
         }
 
         .info {
@@ -389,6 +403,7 @@
             width: 1.7vw;
             height: 1.7vw;
             font-size: 1vw;
+            background-color: #ddd;
         }
 
         .delete {
@@ -396,6 +411,7 @@
             height: 1.7vw;
             font-size: 1vw;
             border-radius: 100%;
+            background-color: #ddd;
         }
 
         /*checkbox*/
@@ -410,7 +426,7 @@
 
         }
 
-        
+
         #headertable {
             top: -5px;
             position: sticky;
@@ -475,10 +491,12 @@
             margin: 15px 5px 5px 5px;
 
         }
-        footer{
+
+        footer {
             grid-area: footer;
             padding-bottom: 5px;
         }
+
         /*Media Query*/
         @media screen and (max-width:1100px) {
             #container1 {
@@ -495,7 +513,7 @@
 
             sidebar {
                 display: none;
-    
+
             }
 
             #content2 {
@@ -539,7 +557,7 @@
     </style>
 </head>
 
-<body>
+<body onkeyup="myFunction(event)">
 
     <div class="container1" id="container1">
         <nav>
@@ -547,10 +565,10 @@
             <section id="social">
                 <div class="globe hide"><a href="tabel.html"><i class="fa fa-globe"></i></a></div>
                 <div class="clock hide"><a href="table1.html"><i class="fa fa-clock-o"></i></a></div>
-                <div class="settings"><a href="#"><i class="fa fa-gear"></i></a></div>
+                <div class="settings"><a href="main.html"><i class="fa fa-angle-double-left"></i></a></div>
             </section>
         </nav>
-        <sidebar>
+        <sidebar id="sidebar">
             <table class="table" id="table">
                 <thead>
                     <tr id="headertable">
@@ -569,22 +587,30 @@
             </table>
         </sidebar>
         <main>
+            <div id="timed"></div>
             <strong>
                 <div ontouchend="work()" class="scramble" id="sequence"></div>
             </strong>
-            <div id="countdown" style="display:none" ontouchend="work()"></div>
-            <h1 ontouchend="work()">
+            <div id="countdown" style="display:none" ontouchend="work()"> </div>
+            <div id="msg" style="display:none">
+                The page will automatically reload after 1 seconds
+            </div>
+            <h1 id="h11" ontouchend="work()">
                 <span id="min">00</span> :
                 <span id="sec">00</span> .
                 <span id="milisec">00</span>
             </h1>
 
-            <span>
-                <input id="inspec" type='checkbox' name='checkboxName[]' value="inspection">Inspection
+            <span id="bbb">
+                <span id="ins_div">
+                    <input id="inspec" type='checkbox' name='checkboxName[]' value="inspection">
+                    <label for="inspec">Inspection</label>
+                </span>
                 <button id="reset" onclick="reset()">Reset</button>
                 <button id="clear" class="clear" onclick="clearstorage()">Clear Table</button>
             </span>
         </main>
+
         <div id="content1">
             <div class="cube s23 hide">
                 <div class="front">
@@ -769,11 +795,39 @@
                     <td>Current Avg. of 500:</td>
                     <td id="row10"></td>
                 </tr>
+                <tr>
+                    <td>Best Avg. of 5:</td>
+                    <td id="row11"></td>
+                </tr>
+                <tr>
+                    <td>Best Avg. of 12:</td>
+                    <td id="row12"></td>
+                </tr>
+                <tr>
+                    <td>Best Avg. of 25:</td>
+                    <td id="row13"></td>
+                </tr>
+                <tr>
+                    <td>Best Avg. of 50:</td>
+                    <td id="row14"></td>
+                </tr>
+                <tr>
+                    <td>Best Avg. of 100:</td>
+                    <td id="row15"></td>
+                </tr>
+                <tr>
+                    <td>Best Avg. of 200:</td>
+                    <td id="row16"></td>
+                </tr>
+                <tr>
+                    <td>Best Avg. of 500:</td>
+                    <td id="row17"></td>
+                </tr>
 
             </table>
         </div>
         <footer>
-            <div>Ⓒ 2020 Developed by Shreya Patel</div>
+            <div>Ⓒ 2020 Developed by PRO-GAMMA</div>
         </footer>
     </div>
     <script>
@@ -856,24 +910,63 @@
             }
             last = document.getElementById("sequence").innerHTML
             document.getElementById("sequence").innerHTML = sequence;
+            var myDate = new Date();
+            y = myDate.getFullYear();
+            m = myDate.getMonth() + 1;
+            d = myDate.getDate();
+            var hours = myDate.getHours();
+            var ampm = hours >= 12 ? 'PM' : 'AM';
+            hours = hours % 12;
+            hours = hours ? hours : 12;
+            var minutes = myDate.getMinutes();
+            minutes = minutes < 10 ? '0' + minutes : minutes;
+            var seconds = myDate.getSeconds();
+            seconds = seconds < 10 ? '0' + seconds : seconds;
+            var myTime = hours + " " + ampm + " : " + minutes + " : " + seconds;
+            document.getElementById("timed").innerHTML = "Date: " + m + "/" + d + "/" + y + "<br>Time: " + myTime;
+
+        }
+        function Fun(x) {
+            if (x.matches) {
+                document.getElementById("content1").style.display = "none";
+                document.getElementById("content2").style.display = "none";
+                document.getElementById("sidebar").style.display = "none";
+            } else {
+                document.getElementById("content1").style.display = "grid";
+                document.getElementById("content2").style.display = "grid";
+                document.getElementById("sidebar").style.display = "grid";
+            }
         }
         var x;
         var startstop = 0;
-        document.addEventListener("keyup", e => {
-            if (e.keyCode === 32) {
+        function myFunction(event) {
+            var x = event.keyCode;
+            if (x === 32) {
                 if (document.getElementById("inspec").checked) {
-                    
+
                     startstop = startstop + 1;
                     if (startstop === 1) {
                         cleartime();
                         cdclear();
                         cdstart();
                         document.getElementById("countdown").style.display = "block";
+                        document.getElementById("sequence").style.display = "none";
+                        document.getElementById("bbb").style.display = "none";
+                        document.getElementById("content1").style.display = "none";
+                        document.getElementById("content2").style.display = "none";
+                        document.getElementById("sidebar").style.display = "none";
+                        document.getElementById("h11").style.display = "none";
                         document.getElementById("inspec").disabled = true;
                     }
                     if (startstop === 2) {
                         cdstop();
                         document.getElementById("countdown").style.display = "none";
+                        document.getElementById("sequence").style.display = "grid";
+                        document.getElementById("bbb").style.display = "block";
+                        document.getElementById("h11").style.display = "inline";
+                        var x = window.matchMedia("(max-width: 1100px)");
+                        Fun(x);
+                        x.addListener(Fun);
                         start();
                         document.getElementById("inspec").disabled = true;
                     }
@@ -903,7 +996,7 @@
                 }
 
             }
-        });
+        };
         function work() {
             if (document.getElementById("inspec").checked) {
                 startstop = startstop + 1;
@@ -912,11 +1005,17 @@
                     cdclear();
                     cdstart();
                     document.getElementById("countdown").style.display = "block";
+                    document.getElementById("sequence").style.display = "none";
+                    document.getElementById("bbb").style.display = "none";
+                    document.getElementById("h11").style.display = "none";
                     document.getElementById("inspec").disabled = true;
                 }
                 else if (startstop === 2) {
                     cdstop();
                     document.getElementById("countdown").style.display = "none";
+                    document.getElementById("sequence").style.display = "grid";
+                    document.getElementById("bbb").style.display = "block";
+                    document.getElementById("h11").style.display = "inline";
                     start();
                     document.getElementById("inspec").disabled = true;
                 }
@@ -946,28 +1045,71 @@
 
             }
         }
-
+        var timeleft = 15;
         function cdstart() {
+            document.getElementById('countdown').innerHTML = timeleft;
+            timeleft--;
             downloadTimer = setInterval(cdtimer, 1000);
         }
-
+        // 
         function cdstop() {
             clearInterval(downloadTimer);
         }
-        var timeleft = 15;
+
+        var plus_2 = false;
         function cdtimer() {
-            if (timeleft <= 0) {
-                document.getElementById('countdown').style.fontSize = "10px";
-                document.getElementById('countdown').innerHTML = "YOU EXCEEDED THE INSPECT TIME PLEASE RESET";
+
+            if (timeleft >= -1 && timeleft <= 0) {
+                // document.getElementById('countdown').style.fontSize = "30px";
+                document.getElementById('countdown').innerHTML = "+2";
+                plus_2 = true;
+                timeleft--;
+
+            }
+            else if (timeleft == -2) {
+                document.getElementById('countdown').style.color = "white";
+                document.getElementById('countdown').innerHTML = "DNF";
+                document.getElementById('msg').style.fontSize = "20px";
+                document.getElementById('msg').style.display = "block";
+                // startstop=0;
+                // console.log(plus_2);
+                if (plus_2 === true) {
+                    tit = "DNF" + document.getElementById("sequence").innerHTML;
+                    // console.log('1');
+                    if (localStorage.getItem('itemsJson') == null) {
+                        itemJsonArray = [];
+                        itemJsonArray.push(tit);
+                        localStorage.setItem('itemsJson', JSON.stringify(itemJsonArray));
+                    }
+                    else {
+                        itemJsonArrayStr = localStorage.getItem('itemsJson');
+                        itemJsonArray = JSON.parse(itemJsonArrayStr);
+                        itemJsonArray.push(tit);
+                        localStorage.setItem('itemsJson', JSON.stringify(itemJsonArray));
+                    }
+                    update();
+                }
+                plus_2 = false;
+                setTimeout(location.reload.bind(location), 1000);
+                // udpate();
+                return;
             }
             else {
+                plus_2 = false;
                 document.getElementById('countdown').innerHTML = timeleft;
+                if (timeleft <= 8 && timeleft >= 6)
+                    document.getElementById('countdown').style.color = "orange";
+                if (timeleft <= 5)
+                    document.getElementById('countdown').style.color = "red";
                 timeleft--;
+
             }
+
         }
         function cdclear() {
             timeleft = 15;
             document.getElementById('countdown').innerHTML = timeleft;
+            document.getElementById('countdown').style.color = "white";
         }
 
 
@@ -1009,10 +1151,6 @@
 
         function timer() {
 
-            miliSecOut = checkTime(milisec);
-            secOut = checkTime(sec);
-            minOut = checkTime(min);
-
             milisec = ++milisec;
 
             if (milisec === 100) {
@@ -1024,15 +1162,33 @@
                 min = ++min;
                 sec = 0;
             }
+
+            miliSecOut = checkTime(milisec);
+            secOut = checkTime(sec);
+            minOut = checkTime(min);
+
             document.getElementById("milisec").innerHTML = miliSecOut;
             document.getElementById("sec").innerHTML = secOut;
             document.getElementById("min").innerHTML = minOut;
 
-
         }
         function getandupdate() {
-            console.log(last);
-            tit = document.getElementById('min').innerHTML + " : " + document.getElementById('sec').innerHTML + " . " + document.getElementById('milisec').innerHTML + last;
+            // console.log(last);
+            if (plus_2 === true) {
+                var curr_sec = parseInt(document.getElementById('sec').innerHTML);
+                curr_sec += 2;
+                var curr_min = parseInt(document.getElementById('min').innerHTML);
+                if (curr_sec >= 60) {
+                    curr_min++;
+                    curr_sec -= 60;
+                }
+                curr_min = checkTime(curr_min);
+                curr_sec = checkTime(curr_sec);
+                tit = curr_min + " : " + curr_sec + " . " + document.getElementById('milisec').innerHTML + last;
+            }
+            else {
+                tit = document.getElementById('min').innerHTML + " : " + document.getElementById('sec').innerHTML + " . " + document.getElementById('milisec').innerHTML + last;
+            }
 
             if (localStorage.getItem('itemsJson') == null) {
                 itemJsonArray = [];
@@ -1061,102 +1217,215 @@
             let str = " ";
             itemJsonArray.forEach((element, index) => {
                 var timee = "";
-                for (var i = 0; i < 12; i++) {
-                    timee += element[i];
-                }
-                str = `
+                console.log(element);
+                if (element[0] === 'D') {
+                    str = `
                     <tr>
                         <th scope="row">${index + 1}</th>
-                        <td>${timee}</td>
+                        <td>DNF</td>
                         <td><button class="delete" onclick="deleted(${index})"><i class="fa fa-trash"></i></button>  
                         <button class="info" onclick="scr(${index})">i</button></td>
                     </tr>` + str;
+                }
+                else {
+                    for (var i = 0; i < 12; i++) {
+                        timee += element[i];
+                    }
+                    str = `
+                        <tr>
+                            <th scope="row">${index + 1}</th>
+                            <td>${timee}</td>
+                            <td><button class="delete" onclick="deleted(${index})"><i class="fa fa-trash"></i></button>  
+                            <button class="info" onclick="scr(${index})">i</button></td>
+                        </tr>` + str;
+                }
             });
             tablebody.innerHTML = str;
 
 
-            //finding avg avg of all the times
+            //finding avg of all the times
             var table = document.getElementById("table"), totalMilliseconds = 0, tms = 0,
                 rowCount = table.rows.length - 1;// minus the header
             document.getElementById("row0").innerHTML = rowCount;
+            var countt = 0;
             for (var i = 1; i < table.rows.length; i++) {
-                parts = [];
-                parts.push(table.rows[i].cells[1].innerHTML[0] + table.rows[i].cells[1].innerHTML[1]);
-                parts.push(table.rows[i].cells[1].innerHTML[5] + table.rows[i].cells[1].innerHTML[6]);
-                parts.push(table.rows[i].cells[1].innerHTML[10] + table.rows[i].cells[1].innerHTML[11]);
-                // console.log(parts)
-                // parts=table.rows[i].cells[1].innerHTML.split(':');
-                let minutes = parseInt(parts[0], 10) * 60000;
-                let seconds = parseInt(parts[1], 10) * 1000;
-                let miliseconds = parseInt(parts[2], 10);
-                totalMilliseconds += (minutes + seconds + miliseconds);
+                if (table.rows[i].cells[1].innerHTML[0] === 'D') {
+                    countt++;
+                }
+                else {
+                    parts = [];
+                    parts.push(table.rows[i].cells[1].innerHTML[0] + table.rows[i].cells[1].innerHTML[1]);
+                    parts.push(table.rows[i].cells[1].innerHTML[5] + table.rows[i].cells[1].innerHTML[6]);
+                    parts.push(table.rows[i].cells[1].innerHTML[10] + table.rows[i].cells[1].innerHTML[11]);
+                    // console.log(parts)
+                    // parts=table.rows[i].cells[1].innerHTML.split(':');
+                    let minutes = parseInt(parts[0], 10) * 60000;
+                    let seconds = parseInt(parts[1], 10) * 1000;
+                    let miliseconds = parseInt(parts[2], 10);
+                    totalMilliseconds += (minutes + seconds + miliseconds);
+                }
             }
-            var avgmin = 0, avgsec = 0, avgmilisec = 0;
-            avgtotalMilliseconds = Math.round(totalMilliseconds / rowCount);
-            avgmin = Math.floor((avgtotalMilliseconds / 60000) << 0);
-            avgmin = avgmin > 9 ? "" + avgmin : "0" + avgmin;
-            avgsec = Math.floor(((avgtotalMilliseconds - (avgmin * 60000)) / 1000) << 0);
-            avgsec = avgsec > 9 ? "" + avgsec : "0" + avgsec;
-            avgmilisec = (avgtotalMilliseconds - (avgmin * 60000) - (avgsec * 1000)) << 0;
-            avgmilisec = avgmilisec > 9 ? "" + avgmilisec : "0" + avgmilisec;
-            if (avgmilisec >= 100) {
-                avgmilisec = Math.round(avgmilisec / 10);
+            if (totalMilliseconds == 0 && rowCount > 0) {
+                document.getElementById("row1").innerHTML = "DNF";
             }
-            document.getElementById("row1").innerHTML = avgmin + " : " + avgsec + " . " + avgmilisec;
+            else {
+                var avgmin = 0, avgsec = 0, avgmilisec = 0;
+                avgtotalMilliseconds = Math.round(totalMilliseconds / (rowCount - countt + 0.0));
+                avgmin = Math.floor((avgtotalMilliseconds / 60000) << 0);
+                avgmin = avgmin > 9 ? "" + avgmin : "0" + avgmin;
+                avgsec = Math.floor(((avgtotalMilliseconds - (avgmin * 60000)) / 1000) << 0);
+                avgsec = avgsec > 9 ? "" + avgsec : "0" + avgsec;
+                avgmilisec = (avgtotalMilliseconds - (avgmin * 60000) - (avgsec * 1000)) << 0;
+                avgmilisec = avgmilisec > 9 ? "" + avgmilisec : "0" + avgmilisec;
+                if (avgmilisec >= 100) {
+                    avgmilisec = Math.round(avgmilisec / 10);
+                }
+                document.getElementById("row1").innerHTML = avgmin + " : " + avgsec + " . " + avgmilisec;
+            }
             // avg last best 5
             var arr1 = [5, 12, 25, 50, 100, 200, 500];
             for (var j = 0; j < 7; j++) {
                 if (rowCount >= arr1[j]) {
                     var arr = [];
+                    var countt = 0;
                     for (var i = 1; i <= arr1[j]; i++) {
-                        parts = [];
-                        parts.push(table.rows[i].cells[1].innerHTML[0] + table.rows[i].cells[1].innerHTML[1]);
-                        parts.push(table.rows[i].cells[1].innerHTML[5] + table.rows[i].cells[1].innerHTML[6]);
-                        parts.push(table.rows[i].cells[1].innerHTML[10] + table.rows[i].cells[1].innerHTML[11]);
-                        // parts=table.rows[i].cells[1].innerHTML.split(':');
-                        let minutes = parseInt(parts[0], 10) * 60000;
-                        let seconds = parseInt(parts[1], 10) * 1000;
-                        let miliseconds = parseInt(parts[2], 10);
-                        arr.push(minutes + seconds + miliseconds);
-                        // console.log(miliseconds);
+                        if (table.rows[i].cells[1].innerHTML[0] == 'D') {
+                            countt++;
+                        }
+                        else {
+                            parts = [];
+                            parts.push(table.rows[i].cells[1].innerHTML[0] + table.rows[i].cells[1].innerHTML[1]);
+                            parts.push(table.rows[i].cells[1].innerHTML[5] + table.rows[i].cells[1].innerHTML[6]);
+                            parts.push(table.rows[i].cells[1].innerHTML[10] + table.rows[i].cells[1].innerHTML[11]);
+                            // parts=table.rows[i].cells[1].innerHTML.split(':');
+                            let minutes = parseInt(parts[0], 10) * 60000;
+                            let seconds = parseInt(parts[1], 10) * 1000;
+                            let miliseconds = parseInt(parts[2], 10);
+                            arr.push(minutes + seconds + miliseconds);
+                            // console.log(minutes, seconds, miliseconds);
+                        }
                     }
-                    arr.sort(function (a, b) { return a > b });
-                    // console.log(arr);
-                    tms = 0;
-                    for (var i = 1; i < arr1[j] - 1; i++) {
-                        tms += arr[i];
+                    if (countt >= 2) {
+                        document.getElementById("row" + (j + 4)).innerHTML = "DNF";
                     }
-                    var avgmin1 = 0, avgsec1 = 0, avgmilisec1 = 0;
-                    atms = Math.round(tms / (arr1[j] - 2.0));
-                    avgmin1 = Math.floor((atms / 60000) << 0);
-                    avgmin1 = avgmin1 > 9 ? "" + avgmin1 : "0" + avgmin1;
-                    avgsec1 = Math.floor(((atms - (avgmin1 * 60000)) / 1000) << 0);
-                    avgsec1 = avgsec1 > 9 ? "" + avgsec1 : "0" + avgsec1;
-                    avgmilisec1 = (atms - (avgmin1 * 60000) - (avgsec1 * 1000)) << 0;
-                    avgmilisec1 = avgmilisec1 > 9 ? "" + avgmilisec1 : "0" + avgmilisec1;
-                    if (avgmilisec1 >= 100) {
-                        avgmilisec1 = Math.round(avgmilisec1 / 10);
+                    else {
+                        arr.sort(function (a, b) { return a - b });
+                        // console.log(arr);
+                        tms = 0;
+                        for (var i = 1; i < arr1[j] - 1; i++) {
+                            tms += arr[i];
+                        }
+                        var avgmin1 = 0, avgsec1 = 0, avgmilisec1 = 0;
+                        var atms = tms / (arr1[j] - 2.0);
+                        // console.log(atms);
+                        avgmin1 = Math.floor((atms / 60000) << 0);
+                        avgmin1 = avgmin1 > 9 ? "" + avgmin1 : "0" + avgmin1;
+                        avgsec1 = Math.floor(((atms - (avgmin1 * 60000)) / 1000) << 0);
+                        avgsec1 = avgsec1 > 9 ? "" + avgsec1 : "0" + avgsec1;
+                        avgmilisec1 = (atms - (avgmin1 * 60000) - (avgsec1 * 1000)) << 0;
+                        if (avgmilisec1 >= 100) {
+                            avgmilisec1 = Math.round(avgmilisec1 / 10);
+                        }
+                        avgmilisec1 = avgmilisec1 > 9 ? "" + avgmilisec1 : "0" + avgmilisec1;
+                        document.getElementById("row" + (j + 4)).innerHTML = avgmin1 + " : " + avgsec1 + " . " + avgmilisec1;
                     }
-                    document.getElementById("row" + (j + 4)).innerHTML = avgmin1 + " : " + avgsec1 + " . " + avgmilisec1;
                 }
                 else {
                     document.getElementById("row" + (j + 4)).innerHTML = " - ";
                 }
             }
 
+            for (var j = 0; j < 7; j++) {
+                var temp = false;
+                if (rowCount >= arr1[j]) {
+                    // console.log('h1');
+                    var ans_avgmin1 = 1000000000.0;
+                    var ans_avgsec1 = ans_avgmin1;
+                    var ans_avgmilisec1 = ans_avgmin1;
+                    for (var ii = 1; ii <= rowCount; ii++) {
+                        if (ii + arr1[j] - 1 > rowCount) {
+                            break;
+                        }
+                        var arr = [];
+                        var countt = 0;
+                        for (var i = ii; i <= ii + arr1[j] - 1; i++) {
+                            if (table.rows[i].cells[1].innerHTML[0] == 'D') {
+                                countt++;
+                            }
+                            else {
+                                parts = [];
+                                parts.push(table.rows[i].cells[1].innerHTML[0] + table.rows[i].cells[1].innerHTML[1]);
+                                parts.push(table.rows[i].cells[1].innerHTML[5] + table.rows[i].cells[1].innerHTML[6]);
+                                parts.push(table.rows[i].cells[1].innerHTML[10] + table.rows[i].cells[1].innerHTML[11]);
+                                // parts=table.rows[i].cells[1].innerHTML.split(':');
+                                let minutes = parseInt(parts[0], 10) * 60000;
+                                let seconds = parseInt(parts[1], 10) * 1000;
+                                let miliseconds = parseInt(parts[2], 10);
+                                arr.push(minutes + seconds + miliseconds);
+                            }
+                            // console.log(miliseconds);
+                        }
+                        if (countt >= 2) {
+                            temp = true;
+                        }
+                        else {
+                            temp = false;
+                            arr.sort(function (a, b) { return a - b });
+                            // console.log(arr);
+                            tms = 0;
+                            for (var i = 1; i < arr1[j] - 1; i++) {
+                                tms += arr[i];
+                            }
+                            var avgmin1 = 0, avgsec1 = 0, avgmilisec1 = 0;
+                            var atms = tms / (arr1[j] - 2.0);
+                            // console.log(tms);
+                            avgmin1 = Math.floor((atms / 60000) << 0);
+                            ans_avgmin1 = Math.min(ans_avgmin1, avgmin1);
+                            // avgmin1 = avgmin1 > 9 ? "" + avgmin1 : "0" + avgmin1;
+                            avgsec1 = Math.floor(((atms - (avgmin1 * 60000)) / 1000) << 0);
+                            ans_avgsec1 = Math.min(ans_avgsec1, avgsec1);
+                            // avgsec1 = avgsec1 > 9 ? "" + avgsec1 : "0" + avgsec1;
+                            avgmilisec1 = (atms - (avgmin1 * 60000) - (avgsec1 * 1000)) << 0;
+                            if (avgmilisec1 >= 100) {
+                                avgmilisec1 = Math.round(avgmilisec1 / 10);
+                            }
+                            ans_avgmilisec1 = Math.min(ans_avgmilisec1, avgmilisec1);
+                        }
+                    }
+                    if (ans_avgmin1 != 1000000000.0) {
+                        ans_avgmin1 = ans_avgmin1 > 9 ? "" + ans_avgmin1 : "0" + ans_avgmin1;
+                        ans_avgsec1 = ans_avgsec1 > 9 ? "" + ans_avgsec1 : "0" + ans_avgsec1;
+                        ans_avgmilisec1 = ans_avgmilisec1 > 9 ? "" + ans_avgmilisec1 : "0" + ans_avgmilisec1;
+                        document.getElementById("row" + (j + 11)).innerHTML = ans_avgmin1 + " : " + ans_avgsec1 + " . " + ans_avgmilisec1;
+                    }
+                    if (temp === true) {
+                        document.getElementById("row" + (j + 11)).innerHTML = "DNF";
+                    }
+                }
+                else {
+                    document.getElementById("row" + (j + 11)).innerHTML = " - ";
+                }
+            }
+
 
             //min max
-            var arr = new Array(table.rows.length - 1);
+            var arr = [];
+            countt = 0;
             for (var i = 1; i < table.rows.length; i++) {
-                parts = [];
-                parts.push(table.rows[i].cells[1].innerHTML[0] + table.rows[i].cells[1].innerHTML[1]);
-                parts.push(table.rows[i].cells[1].innerHTML[5] + table.rows[i].cells[1].innerHTML[6]);
-                parts.push(table.rows[i].cells[1].innerHTML[10] + table.rows[i].cells[1].innerHTML[11]);
-                // parts=table.rows[i].cells[1].innerHTML.split(':');
-                let minutes = parseInt(parts[0], 10) * 60000;
-                let seconds = parseInt(parts[1], 10) * 1000;
-                let miliseconds = parseInt(parts[2], 10);
-                arr[i - 1] = minutes + seconds + miliseconds;
+                if (table.rows[i].cells[1].innerHTML[0] == 'D') {
+                    countt++;
+                }
+                else {
+                    parts = [];
+                    parts.push(table.rows[i].cells[1].innerHTML[0] + table.rows[i].cells[1].innerHTML[1]);
+                    parts.push(table.rows[i].cells[1].innerHTML[5] + table.rows[i].cells[1].innerHTML[6]);
+                    parts.push(table.rows[i].cells[1].innerHTML[10] + table.rows[i].cells[1].innerHTML[11]);
+                    // parts=table.rows[i].cells[1].innerHTML.split(':');
+                    let minutes = parseInt(parts[0], 10) * 60000;
+                    let seconds = parseInt(parts[1], 10) * 1000;
+                    let miliseconds = parseInt(parts[2], 10);
+                    arr.push(minutes + seconds + miliseconds);
+                }
             }
 
             arr.sort(function (a, b) { return a - b });
@@ -1167,7 +1436,12 @@
             avgsec2 = avgsec2 > 9 ? "" + avgsec2 : "0" + avgsec2;
             avgmilisec2 = (arr[0] - (avgmin2 * 60000) - (avgsec2 * 1000)) << 0;
             avgmilisec2 = avgmilisec2 > 9 ? "" + avgmilisec2 : "0" + avgmilisec2;
-            document.getElementById("row2").innerHTML = avgmin2 + " : " + avgsec2 + " . " + avgmilisec2;
+            if (arr.length == 0 && table.rows.length > 1) {
+                document.getElementById("row2").innerHTML = "DNF";
+            }
+            else {
+                document.getElementById("row2").innerHTML = avgmin2 + " : " + avgsec2 + " . " + avgmilisec2;
+            }
 
 
             avgmin3 = Math.floor((arr[table.rows.length - 2] / 60000) << 0);
@@ -1176,7 +1450,12 @@
             avgsec3 = avgsec3 > 9 ? "" + avgsec3 : "0" + avgsec3;
             avgmilisec3 = (arr[table.rows.length - 2] - (avgmin3 * 60000) - (avgsec3 * 1000)) << 0;
             avgmilisec3 = avgmilisec3 > 9 ? "" + avgmilisec3 : "0" + avgmilisec3;
-            document.getElementById("row3").innerHTML = avgmin3 + " : " + avgsec3 + " . " + avgmilisec3;
+            if (countt >= 1) {
+                document.getElementById("row3").innerHTML = "DNF";
+            }
+            else {
+                document.getElementById("row3").innerHTML = avgmin3 + " : " + avgsec3 + " . " + avgmilisec3;
+            }
         }
         function scr(index) {
             var pr = "";
@@ -1207,7 +1486,6 @@
         function reset() {
             cleartime();
             makeScramble();
-            reloadP();
         }
         function cleartime() {
             milisec = 0;
